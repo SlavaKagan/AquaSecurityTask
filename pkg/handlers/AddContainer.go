@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"log"
-	"math/rand"
 	"net/http"
 )
 
@@ -22,8 +21,8 @@ func AddContainer(w http.ResponseWriter, r *http.Request) {
 	var container models.Container
 	json.Unmarshal(body, &container)
 
-	// Append to the Book mocks
-	container.ID = rand.Intn(100)
+	// Append to the container mocks
+	//container.ID = rand.Intn(100)
 	mocks.Containers = append(mocks.Containers, container)
 
 	// Send a 201 created response
