@@ -1,6 +1,6 @@
 package models
 
-// Request Body fields
+/* Request Body fields for creation in db */
 
 type RequestBody struct {
 	Host_id    int    `json:"host_id"`

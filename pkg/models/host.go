@@ -1,6 +1,6 @@
 package models
 
-// host fields
+/* host fields */
 
 type Host struct {
 	ID         int    `json:"id"`

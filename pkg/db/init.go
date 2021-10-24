@@ -7,6 +7,8 @@ import (
 
 var database *sql.DB = nil
 
+/* Connect to the aqua database */
+
 func ConnectDB() {
 	db, err := sql.Open("sqlite3", "./aqua.db")
 	checkErr(err)
@@ -14,12 +16,16 @@ func ConnectDB() {
 	database = db
 }
 
+/* Open the database itself with the data*/
+
 func GetDB() *sql.DB {
 	if database == nil {
 		panic("database not initialized")
 	}
 	return database
 }
+
+/* function for checking varieties of errors */
 
 func checkErr(err error) {
 	if err != nil {

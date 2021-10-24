@@ -7,14 +7,15 @@ import (
 	"strconv"
 )
 
-// getAllHosts responds with the list of all hosts as JSON.
+/* GetAllHosts responds with the list of all hosts as JSON after taking it from DB*/
 
 func GetAllHosts(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, db.GetAllHostsFromDB())
 }
 
-// getHostByID locates the host whose ID value matches the id
-//parameter sent by the client, then returns that host as a response.
+/* GetHostByID locates the host whose ID value matches the id
+parameter sent by the client, then returns that host as a json response after taking it from DB.
+*/
 
 func GetHostByID(c *gin.Context) {
 	id := c.Param("id")

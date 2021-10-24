@@ -5,6 +5,8 @@ import (
 	"database/sql"
 )
 
+/* Get all hosts from the aqua db with SQL */
+
 func GetAllHostsFromDB() []models.Host {
 	db := GetDB()
 
@@ -20,6 +22,8 @@ func GetAllHostsFromDB() []models.Host {
 	return ConvertToHostArray(rows)
 }
 
+/* Get specific host by id (from the user) from the aqua db with SQL */
+
 func GetHostByIDFromDB(hostId int) *models.Host {
 	db := GetDB()
 	rows, err := db.Query("SELECT * FROM hosts WHERE id = $1 ", hostId)
@@ -34,6 +38,8 @@ func GetHostByIDFromDB(hostId int) *models.Host {
 	return host
 }
 
+/* Convert to host model- array */
+
 func ConvertToHostArray(rows *sql.Rows) []models.Host {
 	hosts := make([]models.Host, 0)
 	for rows.Next() {
@@ -42,6 +48,8 @@ func ConvertToHostArray(rows *sql.Rows) []models.Host {
 	}
 	return hosts
 }
+
+/* Convert to host model */
 
 func ConvertToHost(row *sql.Rows) *models.Host {
 	host := &models.Host{}

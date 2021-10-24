@@ -1,6 +1,6 @@
 package models
 
-// container fields
+/* container fields */
 
 type Container struct {
 	ID         int    `json:"id"`

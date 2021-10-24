@@ -6,6 +6,8 @@ import (
 	"github.com/nu7hatch/gouuid"
 )
 
+/* Get all containers from the aqua db with SQL */
+
 func GetAllContainersFromDB() []models.Container {
 	db := GetDB()
 	rows, err := db.Query("SELECT c.id, c.host_id, c.name,c.image_name, h.name FROM containers AS c JOIN hosts AS h on h.id = c.host_id")
@@ -20,6 +22,8 @@ func GetAllContainersFromDB() []models.Container {
 
 	return ConvertToContainerArray(rows)
 }
+
+/* Get containers by id (from the user) from the aqua db with SQL */
 
 func GetContainerByIDFromDB(containerID int) *models.Container {
 	db := GetDB()
@@ -41,6 +45,8 @@ func GetContainerByIDFromDB(containerID int) *models.Container {
 	return container
 }
 
+/* Convert co container model - array */
+
 func ConvertToContainerArray(rows *sql.Rows) []models.Container {
 	containers := make([]models.Container, 0)
 	for rows.Next() {
@@ -50,12 +56,16 @@ func ConvertToContainerArray(rows *sql.Rows) []models.Container {
 	return containers
 }
 
+/* Convert to container model */
+
 func ConvertToContainer(row *sql.Rows) *models.Container {
 	container := &models.Container{}
 	err := row.Scan(&container.ID, &container.Host_ID, &container.Name, &container.Image_Name, &container.Host_name)
 	checkErr(err)
 	return container
 }
+
+/* Create a new container in the aqua db with SQL */
 
 func CreateContainer(host_id int, image_name string) bool {
 	db := GetDB()
@@ -79,6 +89,8 @@ func CreateContainer(host_id int, image_name string) bool {
 	return res
 
 }
+
+/* Get all container for specific host by id (from the user) from the aqua db with SQL */
 
 func GetContainersForHost(host_id int) []models.Container {
 	db := GetDB()

@@ -8,14 +8,14 @@ import (
 	"strconv"
 )
 
-// getAllContainers responds with the list of all containers as JSON.
+/* GetAllContainers responds with the list of all hosts as JSON after taking it from DB */
 
 func GetAllContainers(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, db.GetAllContainersFromDB())
 }
 
-// getContainerByID locates the host whose ID value matches the id
-//parameter sent by the client, then returns that container as a response.
+/* GeContainerByID locates the container whose ID value matches the id
+parameter sent by the client, then returns that host as a json response after taking it from DB */
 
 func GetContainerByID(c *gin.Context) {
 	id := c.Param("id")
@@ -29,7 +29,8 @@ func GetContainerByID(c *gin.Context) {
 	}
 }
 
-// Get container for specific host
+/* GetContainerForHost locates the container whose HostID value matches the id
+parameter sent by the client, then returns that host as a json response after taking it from DB */
 
 func GetContainerForHost(c *gin.Context) {
 	id := c.Param("id")
@@ -43,7 +44,7 @@ func GetContainerForHost(c *gin.Context) {
 	}
 }
 
-// Create a new container with specific request format
+/* PostContainer creates a new container and saving it to the DB */
 
 func PostContainer(c *gin.Context) {
 	reqBody := new(models.RequestBody)

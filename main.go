@@ -10,7 +10,7 @@ import (
 func main() {
 	db.ConnectDB()
 
-	router := gin.Default()
+	router := gin.Default()                             // init a new router
 	router.GET("/host", handlers.GetAllHosts)           // getAllHosts
 	router.GET("/container", handlers.GetAllContainers) // getAllContainers
 
