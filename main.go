@@ -1,26 +1,26 @@
 package main
 
 import (
+	"AquaSecurityChallenge/pkg/db"
 	"AquaSecurityChallenge/pkg/handlers"
-	"github.com/gorilla/mux"
+	"github.com/gin-gonic/gin"
 	"log"
-	"net/http"
 )
 
 func main() {
+	db.ConnectDB()
 
-	router := mux.NewRouter()
+	router := gin.Default()
+	router.GET("/host", handlers.GetAllHosts)           // getAllHosts
+	router.GET("/container", handlers.GetAllContainers) // getAllContainers
 
-	router.HandleFunc("/host", handlers.GetAllHosts).Methods(http.MethodGet)           // getAllHosts
-	router.HandleFunc("/container", handlers.GetAllContainers).Methods(http.MethodGet) // getAllContainers
+	router.GET("/host/:id", handlers.GetHostByID)           // getHostById
+	router.GET("/container/:id", handlers.GetContainerByID) // getContainerById
 
-	router.HandleFunc("/host/{id}", handlers.GetHostById).Methods(http.MethodGet)           // getHostById
-	router.HandleFunc("/container/{id}", handlers.GetContainerById).Methods(http.MethodGet) //getContainerById
+	router.GET("/host/:id/container", handlers.GetContainerForHost) // getContainerByHostId
 
-	router.HandleFunc("/container/{hostId}", handlers.GetContainerForHost).Methods(http.MethodGet) //getContainersForHost
-
-	router.HandleFunc("/container", handlers.AddContainer).Methods(http.MethodPost) //postContainer
+	router.POST("/container", handlers.PostContainer) // postContainer
 
 	log.Println("API is running!")
-	http.ListenAndServe(":9090", router)
+	router.Run("localhost:9090") // port for application
 }

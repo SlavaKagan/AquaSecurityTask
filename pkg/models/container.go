@@ -1,6 +1,7 @@
 package models
 
-// container represents data
+// container fields
+
 type Container struct {
 	ID         int    `json:"id"`
 	Host_ID    int    `json:"host_id"`

@@ -1,6 +1,7 @@
 package models
 
-// host represents data
+// host fields
+
 type Host struct {
 	ID         int    `json:"id"`
 	Uuid       string `json:"uuid"`
